@@ -41,17 +41,15 @@ async function getCourses(id) {
     console.log(courses);
 }
 
-// UPDATE OPERATION : Approach - Query First
-// We find a course by id, if not exists - return, else set keys to be updated.
+// UPDATE OPERATION : Approach - Update Directly
+// We use $set operator in mongodb to update values
 async function updateCourse(id) {
-    const course = await Course.findById(id);
-    if (!course) return;
-    course.set({
-        author: 'Ferrari',
-        isPublished: false
+    const result = await Course.update({ _id: id }, {
+        $set: {
+            author: 'Mercedes',
+            isPublished: true
+        }
     });
-
-    const result = await course.save();
     console.log(result);
 }
 
