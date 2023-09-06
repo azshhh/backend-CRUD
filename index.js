@@ -29,4 +29,16 @@ async function createCourse() {
     console.log(result);
 }
 
-createCourse();
+
+// READ OPERATION
+// We create an object 'courses' for a collection 'Course' in mongodb server
+async function getCourses(id) {
+    const courses = await Course
+        .find({ author: 'Redbull', isPublished: true })
+        .limit(2)
+        .sort({ name: 1 })
+        .select({ name: 1, tags: 1, isPublished: 1 });
+    console.log(courses);
+}
+
+getCourses();
