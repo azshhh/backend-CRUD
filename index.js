@@ -13,3 +13,20 @@ const courseSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now },
     isPublished: Boolean,
 });
+
+// CREATE OPERATION
+// Creating Model that compiles schema to document
+const Course = mongoose.model('Course', courseSchema);
+// Creating object for that Model
+async function createCourse() {
+    const course = new Course({
+        name: 'Django Course',
+        author: 'Mercedes',
+        tags: ['python', 'backend'],
+        isPublished: true
+    });
+    const result = await course.save();
+    console.log(result);
+}
+
+createCourse();
