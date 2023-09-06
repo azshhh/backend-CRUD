@@ -41,4 +41,18 @@ async function getCourses(id) {
     console.log(courses);
 }
 
-getCourses();
+// UPDATE OPERATION : Approach - Query First
+// We find a course by id, if not exists - return, else set keys to be updated.
+async function updateCourse(id) {
+    const course = await Course.findById(id);
+    if (!course) return;
+    course.set({
+        author: 'Ferrari',
+        isPublished: false
+    });
+
+    const result = await course.save();
+    console.log(result);
+}
+
+updateCourse('64f8a7a30d8ce220247feeda');
